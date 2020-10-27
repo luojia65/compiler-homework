@@ -8,6 +8,7 @@ struct SyntaxError {}
 
 type Result<T> = core::result::Result<T, SyntaxError>;
 
+// S → a | λ | (T)
 fn s<I: Iterator<Item = char>>(iter: &mut I, sym: &mut Option<char>) -> Result<()> {
     println!("S; sym = {:?}", *sym);
     match sym {
@@ -26,6 +27,7 @@ fn s<I: Iterator<Item = char>>(iter: &mut I, sym: &mut Option<char>) -> Result<(
     Ok(())
 }
 
+// T → ST'
 fn t<I: Iterator<Item = char>>(iter: &mut I, sym: &mut Option<char>) -> Result<()>  {
     println!("T; sym = {:?}", *sym);
     s(iter, sym)?;
@@ -33,6 +35,7 @@ fn t<I: Iterator<Item = char>>(iter: &mut I, sym: &mut Option<char>) -> Result<(
     Ok(())
 }
 
+// T' → ,ST' | ε
 fn t1<I: Iterator<Item = char>>(iter: &mut I, sym: &mut Option<char>) -> Result<()>  {
     println!("T'; sym = {:?}", *sym);
     if *sym == Some(',') {
