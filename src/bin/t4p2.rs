@@ -137,10 +137,8 @@ fn work(string: &str) {
     let mut sym = iter.next();
     let result = e(&mut iter, &mut sym);
     if let Some(sym) = sym {
-        // if sym != Word::Other {
-            println!("Error: Unexpected tail: {:?}", sym);
-            return;
-        // }
+        println!("Error: Unexpected tail: {:?}", sym);
+        return;
     }
     match result {
         Ok(_) => println!("Matched!"),
